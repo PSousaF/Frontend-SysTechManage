@@ -214,7 +214,7 @@ export class PeoplesComponent implements OnInit {
       this.loading = true;
       this.request.disableEnableItem(id, del).subscribe(res => {
             refresh === 'user' ? this.getAllUsers() : this.getAllOutfitter()
-            data === 'active' ? this.alertService.showAlert('success', 'Usuario ativado com sucesso!') : this.alertService.showAlert('warning', 'Usuario desativado com sucesso!'); 
+            data === 'active' ? this.alertService.showAlert('success', 'Ativado com sucesso!') : this.alertService.showAlert('warning', 'Desativado com sucesso!'); 
         },
         error => {
         const errorResponse = error.error;
