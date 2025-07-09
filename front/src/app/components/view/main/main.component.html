@@ -1,1 +1,523 @@
-<p>main works!</p>
+<div class="container mt-2">
+  <h5 class="mb-2">Resumo</h5>
+  <div class="row">
+  <div class="col-lg-6 col-xl-3 mb-4">
+      <div class="card bg-warning text-white h-100">
+          <div class="card-body" (click)="showModalToCollect()">
+              <div class="d-flex justify-content-between align-items-center">
+                  <div class="me-3">
+                      <div class="text-white-75 small">A Receber</div>
+                      <div class="text-lg fw-bold">R$ {{this.to_receive}}</div>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign feather-xl text-white-50"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+          </div>
+      </div>
+  </div>
+    <div class="col-lg-6 col-xl-3 mb-4">
+      <div class="card bg-primary text-white h-100 c-default">
+          <div class="card-body c-default">
+              <div class="d-flex justify-content-between align-items-center">
+                  <div class="me-3">
+                      <div class="text-white-75 small">Entrada</div>
+                      <div class="text-lg fw-bold">R$ {{entrade}}</div>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign feather-xl text-white-50"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-6 col-xl-3 mb-4">
+      <div class="card bg-danger text-white h-100">
+          <div class="card-body" (click)="showModalToPay()">
+              <div class="d-flex justify-content-between align-items-center">
+                  <div class="me-3">
+                      <div class="text-white-75 small">Saída</div>
+                      <div class="text-lg fw-bold">R$ {{item_out}}</div>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign feather-xl text-white-50"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-6 col-xl-3 mb-4">
+      <div class="card bg-success text-white h-100 c-default">
+          <div class="card-body c-default">
+              <div class="d-flex justify-content-between align-items-center">
+                  <div class="me-3">
+                      <div class="text-white-75 small">Caixa</div>
+                      <div class="text-lg fw-bold">R$ {{checkout}}</div>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign feather-xl text-white-50"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<h5 class="mb-2">Atalhos</h5>
+  <!-- Linha inferior com os cards menores -->
+  <div class="row">
+    <div class="col-md-3 col-sm-6 mb-3" (click)="showModalToPay()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faMoneyBillWave" [size]="'3x'" class="mb-3 text-danger"></fa-icon>
+          <h5 class="card-title mt-2 mt-2">A Pagar</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3" (click)="showModalToCollect()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faHandHoldingUsd" [size]="'3x'" class="mb-3 text-warning"></fa-icon>
+          <h5 class="card-title mt-2">A Receber</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3" (click)="showModalPieces()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faBox" [size]="'3x'" class="mb-3"></fa-icon>
+          <h5 class="card-title mt-2">Peças Pendentes</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3" (click)="showBudgetItens()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faFileInvoiceDollar" [size]="'3x'" class="mb-3 text-info"></fa-icon>
+          <h5 class="card-title mt-2">Orçamentos</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h5 class="mb-2"></h5>
+  <!-- Segunda linha de cards -->
+  <div class="row">
+    <div class="col-md-3 col-sm-6 mb-3" (click)="showModalnewUser()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faUserPlus" [size]="'3x'" class="mb-3 text-primary"></fa-icon>
+          <h5 class="card-title mt-2">Usuario</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3" (click)="listClients()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faTools" [size]="'3x'" class="mb-3 text-secondary"></fa-icon>
+          <h5 class="card-title mt-2">Fornecedores</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3" (click)="showModalClient()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faUserCheck" [size]="'3x'" class="mb-3 text-success"></fa-icon>
+          <h5 class="card-title mt-2">Clientes</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3" (click)="showModalOrder()">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <fa-icon [icon]="faTasks" [size]="'3x'" class="mb-3 text-muted"></fa-icon>
+          <h5 class="card-title mt-2">Ordens</h5>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div class="row">
+    <!-- Coluna FINANCEIRO -->
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <fa-icon [icon]="faChartPie" class="me-2"></fa-icon> FINANCEIRO
+          </h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" (click)="showValues(true)">
+              <fa-icon [icon]="faMoneyBillWave" class="me-2 text-success"></fa-icon> PAGAMENTOS
+            </li>
+            <li class="list-group-item" (click)="showValues(false)">
+              <fa-icon [icon]="faCreditCard" class="me-2 text-danger"></fa-icon> CONTAS
+            </li>
+          </ul>
+          <div *ngIf="payments" class="ms-3 me-3 scroll-modal">
+            <p class="row d-flex justify-content-center mt-2">Pagamentos</p>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Serviço</th>
+                  <th scope="col">Vencimento</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Item</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of list_values_in; let i = index" class="c-default">
+                  <td class="no-wrap" scope="row">{{item.id}}</td>
+                  <td class="no-wrap" scope="row">{{item.descricao}}</td>
+                  <td class="no-wrap" scope="row">{{ajustDate(item.data)}}</td>
+                  <td class="no-wrap" scope="row">R$ {{ajustValue(item.valor)}}</td>
+                  <td class="no-wrap c-pointer" scope="row" (click)="updateValues(item)"><fa-icon [icon]="faMoneyCheck" class="me-2 text-info"
+                    aria-hidden="true" data-toggle="tooltip" data-placement="bottom" [title]="'Confirmar recebimento R$ ' + ajustValue(item.valor)"></fa-icon></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="!payments" class="ms-3 me-3 scroll-modal">
+            <p class="row d-flex justify-content-center mt-2">Contas</p>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Serviço</th>
+                  <th scope="col">Vencimento</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Item</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of list_values_out; let i = index" class="c-default">
+                  <td class="no-wrap" scope="row">{{item.id}}</td>
+                  <td class="no-wrap" scope="row">{{item.descricao}}</td>
+                  <td class="no-wrap" scope="row">{{ajustDate(item.data)}}</td>
+                  <td class="no-wrap" scope="row">R$ {{ajustValue(item.valor)}}</td>
+                  <td class="no-wrap c-pointer" scope="row" (click)="updateValues(item)"><fa-icon [icon]="faMoneyCheck" class="me-2 text-warning"
+                    aria-hidden="true" data-toggle="tooltip" data-placement="bottom" [title]="'Confirmar pagamento R$ ' + ajustValue(item.valor)"></fa-icon></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Coluna ORDEM -->
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">
+            <fa-icon [icon]="faTasks" class="me-2"></fa-icon> ORDEM 
+          </h5>
+        </div>
+        <div class="card-body">
+          <div id="chart">
+            <apx-chart 
+              [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [labels]="chartOptions.labels"
+              [title]="chartOptions.title"
+              [plotOptions]="chartOptions.plotOptions"
+              [responsive]="chartOptions.responsive">
+            </apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- MODAL A PAGAR -->
+    <ng-template #modalAPagar let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Itens a pagar</h4>
+        <button type="button" class="btn-close" aria-label="Close"
+          (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ms-3 me-3 scroll-modal">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Serviço</th>
+                  <th scope="col">Vencimento</th>
+                  <th scope="col">Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of list_values_out; let i = index">
+                  <td class="no-wrap" scope="row">{{item.id}}</td>
+                  <td class="no-wrap" scope="row">{{item.descricao}}</td>
+                  <td class="no-wrap" scope="row">{{ajustDate(item.data)}}</td>
+                  <td class="no-wrap" scope="row">R$ {{ajustValue(item.valor)}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" (click)="modal.dismiss()">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <!-- MODAL A RECEBER -->
+    <ng-template #modalAReceber let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Itens a receber</h4>
+        <button type="button" class="btn-close" aria-label="Close"
+          (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ms-3 me-3 scroll-modal">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Serviço</th>
+                  <th scope="col">Vencimento</th>
+                  <th scope="col">Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of list_values_in; let i = index">
+                  <td class="no-wrap" scope="row">{{item.id}}</td>
+                  <td class="no-wrap" scope="row">{{item.descricao}}</td>
+                  <td class="no-wrap" scope="row">{{ajustDate(item.data)}}</td>
+                  <td class="no-wrap" scope="row">R$ {{ajustValue(item.valor)}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" (click)="modal.dismiss()">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <!-- MODAL ORDENS -->
+    <ng-template #modalOrdens let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Ordens</h4>
+        <button type="button" class="btn-close" aria-label="Close"
+          (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ms-3 me-3">
+          <div class="row d-flex justify-content-center mb-4">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Ordem</th>
+                  <th scope="col">Aparelho</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of list_orders; let i = index">
+                  <td scope="row">{{item.id}}</td>
+                  <td scope="row">{{item.deviceType}}</td>
+                  <td scope="row">{{item.deviceBrand}}</td>
+                  <td><div class="badge rounded-pill text-light"
+                        [ngClass]="{
+                            'bg-danger': item.situation !== 'Em análise' && item.situation !== 'Aprovado'
+                            && item.situation !== 'Concluído' && item.situation !== 'Em reparo' && item.situation !== 'Em garantia',
+                            'bg-warning': item.situation === 'Em análise' || item.situation === 'Em reparo',
+                            'bg-success': item.situation === 'Aprovado',
+                            'bg-info': item.situation === 'Em garantia',
+                            'bg-primary': item.situation === 'Concluído'
+                        }">
+                        <span>{{item.situation}}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" (click)="showOrderItens(); modal.dismiss()">
+            Detalhes
+          </button>
+          <button type="button" class="btn btn-outline-primary" (click)="modal.dismiss()">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <!-- MODAL PECAS PENDENTES -->
+    <ng-template #modalPieces let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Peças Pendentes</h4>
+        <button type="button" class="btn-close" aria-label="Close"
+          (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ms-3 me-3">
+          <div class="row d-flex justify-content-center mb-4">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Ordem</th>
+                  <th scope="col">Aparelho</th>
+                  <th scope="col">Peça</th>
+                  <th scope="col">Local</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of list_pieces; let i = index">
+                  <td scope="row">{{item.id}}</td>
+                  <td scope="row">{{item.deviceType}}</td>
+                  <td scope="row">{{item.pieces}}</td>
+                  <td><div class="badge rounded-pill text-light"
+                        [ngClass]="{
+                            'bg-danger': item.aparroved !== 'Sim' && item.aparroved !== 'Não',
+                            'bg-warning': item.aparroved === 'Sim',
+                            'bg-primary': item.aparroved === 'Não'
+                        }">
+                        <span>{{item.aparroved === 'Não' ? 'Orçamento' : 'Ordem'}}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" (click)="modal.dismiss()">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  <!-- MODAL ADICIONAR USUARIO -->
+  <ng-template #modalNewUser let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Usuários</h4>
+      <button type="button" class="btn-close" aria-label="Close"
+        (click)="cleanNewUser(); modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="ms-3 me-3">
+        <p class="text-center"><strong>Adicionar Novo Usuário</strong></p>
+        <p *ngIf="error_new_user" class="text-center text-danger">
+          <strong>Preencha todos os campos</strong>
+        </p>
+        <div class="row d-flex justify-content-center mb-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold mb-0">Nome&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" name="name" class="form-control" [(ngModel)]="add_name" (change)="verifyDataNewUser()" />
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold">Usuário&nbsp;</label>
+            <input type="text" name="user" class="form-control" [(ngModel)]="add_user" (change)="verifyDataNewUser()" />
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold">CPF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" name="cpf" class="form-control" [(ngModel)]="add_cpf"
+            autocomplete="off" maxlength="14"
+            (input)="formatCPF($event);"/>
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold">Senha&nbsp;&nbsp;&nbsp;</label>
+            <input type="password" name="pass" class="form-control"
+              [(ngModel)]="add_password" (change)="verifyDataNewUser()" />
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold me-2">Acesso </label>
+            <select
+              class="form-select"
+              aria-label="turno"
+              [(ngModel)]="access_usr"
+              (change)="changeAccess($event)">
+              <option [value]="1">Básico</option>
+              <option [value]="2">Total</option>
+            </select>
+            <fa-icon [icon]="faInfoCircle" class="mb-1 text-info c-pointer" (click)="show_info_deail == false ? show_info_deail = true: show_info_deail = false"></fa-icon>
+          </div>
+          <div *ngIf="show_info_deail">
+            <h6 class="mt-1 ft-simple">
+              Básico: Apenas visualização e edição da ordem
+            </h6>
+            <h6 class="mt-1 ft-simple">
+              Total: Visualização, inserção, alteração e remoção
+            </h6>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modal.dismiss(saveNewUser())">
+          Salvar
+        </button>
+        <!--button type="button" class="btn btn-success" (click)="modal.close()">Salvar</button   [disabled]="!verifyDataNewUser()"    -->
+        <button type="button" class="btn btn-dark" (click)="cleanNewUser();modal.dismiss()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+    <!-- MODAL ADICIONAR CLIENTE -->
+    <ng-template #modalNewClient let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cliente</h4>
+        <button type="button" class="btn-close" aria-label="Close"
+          (click)="cleanNewClient(); modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ms-3 me-3">
+          <p class="text-center"><strong>Adicionar Novo Cliente</strong></p>
+          <p *ngIf="error_new_client" class="text-center text-danger">
+            <strong>Preencha todos os campos</strong>
+          </p>
+          <div class="row d-flex justify-content-center mb-3">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <label class="form-label font-bold mb-0">Nome&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" name="name_cli" class="form-control" [(ngModel)]="add_client" (change)="verifyDataNewClient()" />
+            </div>
+    
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <label class="form-label font-bold">Telefone&nbsp;</label>
+              <input type="text" name="telefone" class="form-control" [(ngModel)]="add_tel_client" 
+              (input)="formatTel($event);" (change)="verifyDataNewClient()" />
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <label class="form-label font-bold mb-0">Endereço</label>
+              <input type="text" name="address_cli" class="form-control" [(ngModel)]="add_address_cli" (change)="verifyDataNewClient()" />
+            </div>
+                
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <label class="form-label font-bold">CPF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" name="cpf" class="form-control" [(ngModel)]="add_cpf_cli"
+              autocomplete="off" maxlength="14"
+              (input)="formatCPF($event);"/>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <label class="form-label font-bold mb-0">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="email" name="email" class="form-control" [(ngModel)]="add_email_cli" />
+            </div>
+
+            <!--div class="d-flex align-items-center gap-2 mb-3">
+              <label class="form-label font-bold mb-0">Empresa&nbsp;</label>
+              <input type="text" name="enterprise_cli" class="form-control" [(ngModel)]="add_enterprise_cli"/>
+            </div-->
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-primary flex-shrink-0" (click)="modal.dismiss(listClients())">
+                Listar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="modal.dismiss(saveNewClient())">
+            Salvar
+          </button>
+          <!--button type="button" class="btn btn-success" (click)="modal.close()">Salvar</button [disabled]="!verifyDataNewClient()" -->
+          <button type="button" class="btn btn-dark" (click)="cleanNewClient();modal.dismiss()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  

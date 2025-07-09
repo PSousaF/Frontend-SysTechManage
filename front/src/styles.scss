@@ -1,6 +1,8 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
+/*@import "../node_modules/bootstrap/scss/bootstrap";
 @import '~@fortawesome/fontawesome-free/css/all.css';
-@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';*/
+@use "bootstrap/scss/bootstrap" as *;
+@use "bootstrap" as *;
 
 .c-pointer {
     cursor: pointer;
@@ -10,3 +12,8 @@
     cursor: default;
   }
   
+  :root {
+    .table {
+    --bs-table-hover-bg: #e0f1ff!important; 
+    }
+  }

@@ -1,0 +1,29 @@
+.custom-scroll-images-horizontal {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.custom-scroll-images-horizontal img {
+  width: 130px;
+}
+
+.custom-scroll-images-horizontal::-webkit-scrollbar {
+  height: 8px;
+}
+
+.custom-scroll-images-horizontal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.custom-scroll-images-horizontal::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.custom-scroll-images-horizontal::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

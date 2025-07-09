@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-custom navbar-mainbg position-relative"> <!-- Adicione position-relative -->
+    <a class="navbar-brand navbar-logo" href="#">SysTecManager</a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0);" (click)="toggleDropdown()">
+                    <fa-icon [icon]="faCircleUser" [size]="'2x'"></fa-icon>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end position-absolute end-0 mt-2 me-2" 
+                    [class.show]="isDropdownOpen"
+                    [@fadeInOut]="isDropdownOpen ? 'in' : 'out'"
+                    (click)="$event.stopPropagation()"
+                    style="z-index: 1000; min-width: 200px;">
+                    <a class="dropdown-item text-dark pd-0" href="#">
+                        <fa-icon [icon]="faSignOutAlt" class="me-2"></fa-icon> Sair
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- MODAL NOVO ORÇAMENTO -->
+<ng-template #modaNewBudget let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Orçamentos</h4>
+      <button type="button" class="btn-close" aria-label="Close"
+        (click)="cleanNewBudget(); modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="ms-3 me-3">
+        <p class="text-center"><strong>Adicionar Novo Orçamento</strong></p>
+        <p *ngIf="error_new_user" class="text-center text-danger">
+          <strong>Preencha todos os campos</strong>
+        </p>
+        <div class="row d-flex justify-content-center mb-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold mb-0">Nome&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="form-control" [(ngModel)]="add_name" />
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold">Usuário&nbsp;</label>
+            <input type="text" class="form-control" [(ngModel)]="add_user" />
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold">CPF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="form-control" [(ngModel)]="add_cpf" />
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold">Senha&nbsp;&nbsp;&nbsp;</label>
+            <input
+              type="password"
+              class="form-control"
+              [(ngModel)]="add_password"
+            />
+          </div>
+  
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <label class="form-label font-bold me-2">Acesso</label>
+            <select
+              class="form-select"
+              aria-label="turno"
+              [(ngModel)]="access_usr"
+              (change)="changeAccess($event)">
+              <option value="1" selected>Básico</option>
+              <option value="2">Parcial</option>
+              <option value="3">Total</option>
+            </select>
+          </div>
+            <h6 class="mt-2 ft-simple">
+              Básico: Apenas visualização
+            </h6>
+            <h6 class="mt-2 ft-simple">
+              Parcial: Visualização e inserção
+            </h6>
+            <h6 class="mt-2 ft-simple">
+              Total: Visualização, inserção, alteração e remoção
+            </h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="saveNewBudget()">
+          Salvar
+        </button>
+        <button type="button" class="btn btn-dark" (click)="cleanNewBudget(); modal.dismiss()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </ng-template>

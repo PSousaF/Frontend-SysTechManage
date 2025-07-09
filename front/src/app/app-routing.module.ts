@@ -4,18 +4,26 @@ import { LoginComponent } from './components/view/login/login.component';
 import { MainComponent } from './components/view/main/main.component';
 //import { EmptyLayoutComponent } from './components/others/empty-layout/empty-layout.component';
 import { AuthGuard } from '../app/components/service/AuthGuard';
+import { InternalLayoutComponent } from './components/others/internal-layout/internal-layout.component'; 
+import { HomeComponent } from './components/view/home/home.component';
 
 const routes: Routes = [
-  /*{
-    path: 'test', component: DefaultLayoutComponent, data: { title: 'Producao' },
-    //  children: [
-    //    { path: '', component: PinturaComponent }
-    //  ], //canActivate: [AuthGuard]
-    },
-  { path: '',   redirectTo: '/login', pathMatch: 'full' },*/
+  /*{ path: '',   redirectTo: '/login', pathMatch: 'full' },*/
   {path: 'login', component: LoginComponent, data: { title: 'Login' }},
   {path: '', component: LoginComponent, data: { title: 'Login' }},
-  {path: 'main', component: MainComponent, data: { title: 'Main' }},
+  //{path: 'home', component: MainComponent, data: { title: 'Login' }},
+  {
+    path: 'main', component: InternalLayoutComponent, data: { title: 'Main' },
+      children: [
+        { path: '', component: MainComponent }
+      ], //canActivate: [AuthGuard]
+    },
+    {
+      path: 'home', component: InternalLayoutComponent, data: { title: 'Home' },
+        children: [
+          { path: '', component: HomeComponent }
+        ], //canActivate: [AuthGuard]
+      },
 ];
 
 

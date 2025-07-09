@@ -1,1 +1,356 @@
-<p>budget works!</p>
+<!-- Listar Orcamentos -->
+<div class="container-xl px-4 mt-4">
+  <div *ngIf="!showNewBudget" class="container-fluid">
+    <div class="container-fluid email-wrap bookmark-wrap todo-wrap">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="container-fluid">
+            <div class="page-title">
+            <div class="row">
+                <div class="col-6 mt-2 mb-2">
+                <h4>Orçamentos</h4>
+                </div>
+            </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary mb-3" (click)="changeBudget(true)">
+            <fa-icon [icon]="faCirclePlus" class="mb-3 text-light"></fa-icon>
+        </button>
+    </div>
+    <div class="row">
+      <div class="col-xxl-3 col-xl-4 mb-3">
+        <div class="email-sidebar md-sidebar">
+          <div class="email-left-aside md-sidebar-aside">
+            <div class="card"> 
+              <div class="card-body"> 
+                <div class="email-app-sidebar left-bookmark custom-scrollbar">
+                  <div class="d-flex align-items-center">
+                    <div class="media-size-email"><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt=""></div>
+                    <div class="flex-grow-1"> 
+                      <h5>Detalhes</h5>
+                    </div>
+                  </div>
+                    <h6>Ordem: <div class="badge rounded-pill bg-info text-light"><span>{{detail_budget?.id}}</span></div></h6>
+                    <hr>
+                    <h6>Quantidade: {{detail_budget?.quantity}}</h6>
+                    <hr>
+                    <h6>Análise: {{detail_budget?.review}}</h6>
+                    <hr>
+                    <h6>Defeito: {{detail_budget?.defect}}</h6>
+                    <hr>
+                    <h6>Causa: {{detail_budget?.possibleCauses}}</h6>
+                    <hr>
+                    <h6>Obs.: {{detail_budget?.observation}}</h6>
+                    <!--hr>Imagens
+                    <div class="card-body custom-scroll-images-horizontal">
+                        <img
+                        *ngFor="let url of imageUrls; let i = index"
+                        [src]="url"
+                        alt="Imagem {{ i + 1 }}"
+                        class="img-fluid m-2">
+                    </div-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<div class="col-xxl-9 col-xl-8 box-col-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="todo">
+        <div class="col-lg-12">
+          <div class="ibox">
+            <div class="ibox-content">
+              <div class="row">
+                <div class="d-flex justify-content-end">
+                  <div class="col-sm-3">
+                    <div class="input-group mb-3">
+                      <input type="text" name="localize_budget" class="form-control form-control-sm" placeholder="Localizar" [(ngModel)]="localize_budget_item" (input)="localizeBudgetItem($event)" >
+                      <button class="btn btn-sm btn-primary" type="button">
+                        <fa-icon [icon]="faSearch" class="mb-3 text-light"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                  <thead class="ff-secondary">
+                    <tr>
+                      <th>#</th>
+                      <th>Tipo</th>
+                      <th>Modelo</th>
+                      <th>Marca</th>
+                      <th>Aprovado</th>
+                      <th>Status</th>
+                      <th>Iniciar</th>
+                    </tr>
+                  </thead>
+                  <tbody class="scrollable-tbody">
+                    <tr class="c-pointer" *ngFor="let item of list_budget; let i = index">
+                                            <td (click)="showItemDetail(item)">{{item.id}}</td>
+                                            <td (click)="showItemDetail(item)">{{item.deviceType}}</td>
+                                            <td (click)="showItemDetail(item)">{{item.serie}}</td>
+                                            <td (click)="showItemDetail(item)">{{item.model}}</td>
+                                            <td (click)="showItemDetail(item)"><div class="badge rounded-pill text-light"
+                                                [ngClass]="{
+                                                    'bg-danger': item.aparroved !== 'Sim' && item.aparroved !== 'Pendente',
+                                                    'bg-success': item.aparroved === 'Sim',
+                                                    'bg-warning': item.aparroved === 'Pendente'
+                                                }"><span>{{item.aparroved}}</span></div></td>
+                                            <td (click)="showItemDetail(item)"><div class="badge rounded-pill text-light"
+                                                [ngClass]="{
+                                                    'bg-danger': item.situation !== 'Em análise' && item.situation !== 'Aprovado'
+                                                    && item.situation !== 'Concluído' && item.situation !== 'Em reparo' && item.situation !== 'Em garantia',
+                                                    'bg-warning': item.situation === 'Em análise' || item.situation === 'Em reparo',
+                                                    'bg-success': item.situation === 'Aprovado',
+                                                    'bg-info': item.situation === 'Em garantia',
+                                                    'bg-primary': item.situation === 'Concluído'
+                                                }">
+                                                <span>{{item.situation}}</span>
+                                            </div></td>
+                                            <td (click)="startBudget(item)"><fa-icon [icon]="faCirclePlay" class="mb-3 text-success"></fa-icon></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Novo Orcamento -->
+<div *ngIf="showNewBudget" class="container-xl px-4 mt-4">
+    <div class="row">
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-warning mb-3 flex-shrink-0" (click)="changeBudget(false)">
+            Cancelar
+        </button>
+    </div>
+        <div class="col-xl-3">
+            <div class="card mb-3 mb-xl-0">
+                <div class="card-header d-flex justify-content-between align-items-center" (click)="addClientOrAnswerable(true)">
+                    Cliente
+                    <span class="ms-auto"><fa-icon [icon]="faLocation" class="mb-3 text-secondary"></fa-icon></span>
+                  </div>
+                <div class="card-body text-center">
+                    <img class="img-account-profile rounded-circle mb-2 w-160" [src]="usrImgUrl" alt="">
+                    <div class="small font-italic text-muted mb-1">Nome: {{nome_cli}}</div>
+                    <div class="small font-italic text-muted mb-1">Telefone: {{tel_cli}}</div>
+                    <div class="small font-italic text-muted mb-1">Endereço: {{end_cli}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9">
+            <div class="card mb-4">
+                <div class="card-header">{{orcamento}}</div>
+                <div class="card-body">
+                    <form>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-5">
+                                <label class="small mb-1" for="tipo">Tipo Do aparelho</label>
+                                <input class="form-control" id="tipo" name="start_type_budget" type="text" placeholder="TV, Monitor, Rádio, etc" [disabled]="startBuddgeItem" [(ngModel)]="start_type_budget">
+                            </div>
+                            <div class="col-md-5">
+                                <label class="small mb-1" for="modelo">Modelo</label>
+                                <input class="form-control" name="start_model_budget" id="modelo" type="text" placeholder="Modelo do aparelho" [disabled]="startBuddgeItem" [(ngModel)]="start_model_budget">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="small mb-1" for="quantidade">Quantidade</label>
+                                <input class="form-control" id="quantidade" name="start_qtde_budget" type="number" placeholder="Quantidade" value="1" [disabled]="startBuddgeItem" [(ngModel)]="start_qtde_budget">
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-5">
+                                <label class="small mb-1" for="marca">Marca</label>
+                                <input class="form-control" id="marca" name="start_mark_budget" type="text" placeholder="Samsung, LG, TLC, etc" [disabled]="startBuddgeItem" [(ngModel)]="start_mark_budget">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="small mb-1" for="serie">N de série</label>
+                                <input class="form-control" name="start_serie_budget" id="serie" type="text" placeholder="Série do aparelho" [disabled]="startBuddgeItem" [(ngModel)]="start_serie_budget">
+                            </div>
+                            <div class="col-md-5">
+                                <label class="small mb-1" for="defeito">Defeito relatado</label>
+                                <input class="form-control" name="start_defect_budget" id="defeito" type="text" placeholder="Defeito apresentado" [disabled]="startBuddgeItem" [(ngModel)]="start_defect_budget">
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="analise">Análise inicial</label>
+                                <input class="form-control" name="start_analise_budget" id="analise" type="text" placeholder="Testes iniciais" [disabled]="startBuddgeItem" [(ngModel)]="start_analise_budget">
+                            </div>
+                          <div class="col-md-6">
+                              <label class="small mb-1" for="causas">Status</label>
+                              <select class="form-control" name="start_detail_budget" id="causas" [(ngModel)]="start_detail_budget"  (change)="onSelectChange($event)">
+                                  <option value="Em análise" selected>Em análise</option>
+                                  <option value="Aprovado">Aprovado</option>
+                                  <option value="Em reparo">Em reparo</option>
+                                  <option value="Aguardando peça">Aguardando peça</option>
+                                  <option value="Em garantia">Em garantia</option>
+                                  <option value="Concluído">Concluído</option>
+                              </select>
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="obs">Possíveis causas</label>
+                            <textarea class="form-control" name="start_cause_budget" id="obs" rows="2" style="resize: none;" [disabled]="startBuddgeItem" [(ngModel)]="start_cause_budget"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="obs">Observações</label>
+                            <textarea class="form-control" name="start_obs_budget" id="obs" rows="4" style="resize: none;" [(ngModel)]="start_obs_budget"></textarea>
+                        </div>
+                        <div *ngIf="startBuddgeItem" class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="valores">Valor</label>
+                                <input class="form-control" name="start_value_budget" id="valores" type="text" placeholder="Valor cobrado do cliente" [(ngModel)]="start_value_budget">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="causas">Valor Total Gasto</label>
+                                <input class="form-control" name="start_cost_budget" id="causas" type="text" placeholder="Valor total gasto das peças"[(ngModel)]="start_cost_budget">
+                            </div>
+                        </div>
+                        <div *ngIf="startBuddgeItem" class="mb-3">
+                            <label class="small mb-1" for="obs">Peças utilizadas</label>
+                            <textarea class="form-control" id="obs" name="start_pcutility_budget" rows="2" style="resize: none;"  [(ngModel)]="start_pcutility_budget"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <button *ngIf="!startBuddgeItem" type="button" class="btn btn-primary" (click)="addClientOrAnswerable(false)">
+                                Adicionar Responsável
+                            </button>
+                            <div class="form-check">
+                                <input class="form-check-input" id="solid4" type="checkbox" [checked]="start_aproved_budget" (change)="onApprovalChange($event)">
+                                <label class="form-check-label" for="solid4">Aprovado</label>
+                            </div>
+                        </div>
+                    <div *ngIf="!startBuddgeItem" class="upload-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                            [class.drag-over]="isDragOver">
+                        <div class="upload-content">
+                            <i class="upload-icon fa fa-cloud-upload-alt"></i>
+                            
+                            <div class="upload-text">
+                            <h5>Arraste e solte as imagens aqui</h5>
+                            <span>ou</span>
+                            <label for="fileInput" class="browse-btn">Selecione no computador</label>
+                            <input id="fileInput" type="file" accept="image/*" multiple (change)="onFileSelected($event)" style="display: none;">
+                            </div>
+                            
+                            <div *ngIf="errorMessage" class="error-message">
+                            {{errorMessage}}
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="uploadedImages.length > 0 && !startBuddgeItem" class="card-body custom-scroll-images-horizontal">
+                        <div class="image-item" *ngFor="let url of uploadedImages; let i = index">
+                            <img [src]="url.data"  alt="Imagem {{ i + 1 }}"  class="img-fluid m-2">
+                             <div class="btn-custom-close"> 
+                                <fa-icon [icon]="faTimes" class="mb-3 badge rounded-pill bg-danger text-light" (click)="removeImage(i)"></fa-icon>
+                            </div>    
+                        </div>
+                    </div>
+                    <div *ngIf="uploadedImages.length > 0 && startBuddgeItem" class="card-body custom-scroll-images-horizontal">
+                        <div class="image-item" *ngFor="let url of uploadedImages; let i = index">
+                            <img [src]="url.data"  alt="Imagem {{ i + 1 }}"  class="img-fluid m-2"(click)="showModalImg(url.data)">
+                        </div>
+                    </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2 mt-2">
+                            <p>{{answerable}}</p>
+                            <button type="button" class="btn btn-success flex-shrink-0" (click)="saveBudget()">
+                                Salvar
+                            </button>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <!-- MODAL LOCALIZA -->
+    <ng-template #modalseachClient let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{title_cli_ans ? 'Clientes' : 'Responsável'}}</h4>
+        <button type="button" class="btn-close" aria-label="Close"
+          (click)="cleanModalSeach(); modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ms-3 me-3">
+          <div class="row d-flex justify-content-center mb-3">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <label class="form-label font-bold mb-0">Localizar</label>
+              <input type="text" name="name_cli" class="form-control" [(ngModel)]="localize_client" (input)="localizeClientorOnwer($event)" />
+            </div>
+  <div class="col-lg-12">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="ff-secondary">
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>CPF</th>
+                            <th>Iniciar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="c-pointer" *ngFor="let item of list_peoples; let i = index">
+                            <td (click)="modal.dismiss(selectClient(item))">{{list_peoples[i].id}}</td>
+                            <td (click)="modal.dismiss(selectClient(item))">{{list_peoples[i].nome}}</td>
+                            <td (click)="modal.dismiss(selectClient(item))">{{list_peoples[i].telefone}}</td>
+                            <td (click)="modal.dismiss(selectClient(item))">{{list_peoples[i].cpf}}</td>
+                            <td (click)="modal.dismiss(selectClient(item))"><fa-icon [icon]="faCirclePlay" class="mb-3 text-primary"></fa-icon></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-dark" (click)="cleanModalSeach();modal.dismiss()">
+        Cancelar
+        </button>
+    </div>
+    </div>
+</ng-template>
+
+<!-- MODAL IMAGEM DO PERFIL -->
+<ng-template #showImageDetails let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text-primary" id="modal-basic-title">
+      <i class="fa-solid fa-circle-info text-primary me-2"></i
+      ><strong>Visualização da imagem</strong>
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body d-flex justify-content-center">
+    <div class="mb-4 position-relative image-container">
+      <img
+        [src]="img_modal"
+        alt="Desenho"
+        class="img-fluid modal-image"
+      />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="modal.dismiss('Cross click')"
+    >
+      Fechar
+    </button>
+  </div>
+</ng-template>

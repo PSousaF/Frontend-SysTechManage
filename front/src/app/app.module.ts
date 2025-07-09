@@ -9,17 +9,27 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/view/login/login.component';
 import { MainComponent } from './components/view/main/main.component';
 import { BudgetComponent } from './components/view/budget/budget.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/others/header/header.component';
+import { FooterComponent } from './components/others/footer/footer.component';
+import { InternalLayoutComponent } from './components/others/internal-layout/internal-layout.component';
+import { HomeComponent } from './components/view/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     BudgetComponent,
-    MainComponent
+    MainComponent,
+    HeaderComponent,
+    FooterComponent,
+    InternalLayoutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule 
   ],
   providers: [

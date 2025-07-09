@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+i {
+	margin-right: 10px;
+}
+.navbar-logo{
+	padding: 15px;
+	color: #fff;
+}
+.navbar-mainbg{
+	background-color: #5161ce;
+	padding: 0px;
+}
+#navbarSupportedContent ul li a{
+	color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+    padding: 20px 20px;
+    transition-duration:0.6s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+
+.navbar-expand-custom .navbar-nav {
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+.navbar-expand-custom .navbar-collapse {
+	display: -ms-flexbox!important;
+	display: flex!important;
+	-ms-flex-preferred-size: auto;
+	flex-basis: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dropdown-menu {
+	border: none;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	min-width: 200px;
+	
+	.dropdown-item {
+	  padding: 0.5rem 1.5rem;
+	  display: flex;
+	  align-items: center;
+	  
+	  &:hover {
+		background-color: #f8f9fa;
+	  }
+	  
+	  fa-icon {
+		width: 20px;
+		text-align: center;
+	  }
+	}
+  }
+  
+  .pd-0 { 
+    padding: 10px 20px !important;
+  }
+
+  .click-outside {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	display: none;
+	
+	&.active {
+	  display: block;
+	}
+  }

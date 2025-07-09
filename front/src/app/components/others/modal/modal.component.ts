@@ -3,6 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'modal',
+  standalone: true,
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
